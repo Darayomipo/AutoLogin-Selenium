@@ -10,10 +10,10 @@ def login():
     driver = webdriver.Firefox(options=options)
     
     try:
-        driver.get("#webpage#")
+        driver.get("http://hotspot.ttca.ie/login")
 
-        username = "USERNAME"
-        password = "PASSWORD"
+        username = "127dara"
+        password = "ttca4"
 
         wait = WebDriverWait(driver, 20)
 
@@ -38,10 +38,21 @@ def login():
         driver.quit()
 
 def perform_login():
-    while True:
-        login()
-        # Wait for some time before attempting to log in again (e.g., 6 hours)
-        time.sleep(6 * 60 * 60)
+    wait_time = 6 * 60 * 60  # 6 hours in seconds
 
-# Call perform_login initially to start the process
+    while True:
+        start_time = time.time()
+        login()
+        elapsed_time = time.time() - start_time
+        print(f"Login attempt took {elapsed_time:.2f} seconds")
+
+        remaining_time = wait_time
+        while remaining_time > 0:
+            hours, remainder = divmod(remaining_time, 3600)
+            minutes, seconds = divmod(remainder, 60)
+            print(f"Time until next login: {int(hours)} hours, {int(minutes)} minutes, {int(seconds)} seconds", end="\r")
+            time.sleep(1)
+            remaining_time -= 1
+
+
 perform_login()
