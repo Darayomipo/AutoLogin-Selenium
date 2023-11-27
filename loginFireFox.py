@@ -10,10 +10,10 @@ def login():
     driver = webdriver.Firefox(options=options)
     
     try:
-        driver.get("http://hotspot.ttca.ie/login")
+        driver.get("ADDRESS")
 
-        username = "127dara"
-        password = "ttca4"
+        username = "USERNAME"
+        password = "PASSWORD"
 
         wait = WebDriverWait(driver, 20)
 
